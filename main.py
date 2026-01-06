@@ -1,4 +1,22 @@
 from PIL import Image , ImageEnhance , ImageFilter
 import os
+from ChoiceHandler import editChoice
+path = './imgs' # folder for unedited images
+pathOut = '/editedImgs' # folder for edited images
 
-path = './imgs'
+for filename in os.listdir(path):
+    img = Image.open(f"{path}/{filename}")
+
+    # sharpening
+   # edit = img.filter(ImageFilter.BoxBlur(1))
+
+    # contrast
+   # factor = 1.5
+   # enhancer = ImageEnhance.Contrast(edit)
+    #edit = enhancer.enhance(factor)
+
+    edit = editChoice(img)
+
+    clean_name = os.path.splitext(filename)[0]
+
+    edit.save(f'.{pathOut}/{clean_name}_edited.jpg')
