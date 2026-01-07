@@ -6,17 +6,15 @@ pathOut = '/editedImgs' # folder for edited images
 
 for filename in os.listdir(path):
     img = Image.open(f"{path}/{filename}")
-
-    # sharpening
-   # edit = img.filter(ImageFilter.BoxBlur(1))
-
-    # contrast
-   # factor = 1.5
-   # enhancer = ImageEnhance.Contrast(edit)
-    #edit = enhancer.enhance(factor)
-
-    edit = editChoice(img)
-
+    current_img = img
+    history = []
+    while True:
+        edit = editChoice(img,history)
+        if edit == "SAVE_AND_EXIT":
+            break
+        current_img = edit
     clean_name = os.path.splitext(filename)[0]
 
-    edit.save(f'.{pathOut}/{clean_name}_edited.jpg')
+    current_img.save(f'.{pathOut}/{clean_name}_edited.jpg')
+    print(f"Final Version of {clean_name} saved!")
+
